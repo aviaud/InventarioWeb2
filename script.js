@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwW8qtthsqxvrbcF1lXbIJAKIvQtOUsMwjbXN2XrPNdOVFjrgWX3I_CD4y3B2ewkQPi/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwjzizKbrXBPZ2IcXuRcbxUNQYrVd-2twt0Sfx1bcdS6V1qKXyoIHUPRa1FEUZu10yT/exec";
 
 function cargarInventario() {
   fetch(API_URL)
@@ -56,4 +56,5 @@ document.getElementById("form-agregar").addEventListener("submit", function(e) {
 });
 
 cargarInventario();
+
 
