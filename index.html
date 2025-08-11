@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Inventario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #000;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sistema de Inventario</h1>
+
+  <h2>Agregar Producto</h2>
+  <form id="form-agregar">
+    <input type="text" id="codigo" placeholder="Código" required>
+    <input type="text" id="descripcion" placeholder="Descripción" readonly>
+    <input type="number" id="cantidad" placeholder="Cantidad" required>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <h2>Inventario Actual</h2>
+  <table id="tabla-inventario">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
