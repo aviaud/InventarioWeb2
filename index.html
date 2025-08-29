@@ -1,43 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Inventario</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1, h2 { text-align: center; }
-    form { margin-bottom: 20px; text-align: center; }
-    input { margin: 5px; padding: 5px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    table, th, td { border: 1px solid #000; }
-    th, td { padding: 8px; text-align: left; }
-    button { padding: 5px 10px; cursor: pointer; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Inventario</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f6; /* Fondo suave */
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      color: #3498db;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+      justify-content: center;
+      gap: 15px; /* Espacio entre elementos del formulario */
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      flex: 1; /* Para que ocupen espacio de forma flexible */
+      min-width: 150px; /* Ancho mínimo para cada input */
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+      outline: none;
+    }
+
+    button[type="submit"] {
+      padding: 12px 25px;
+      background-color: #28a745; /* Botón verde para agregar */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden; /* Asegura que los bordes redondeados se apliquen a la tabla */
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #3498db; /* Azul corporativo */
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2; /* Cebra para filas */
+    }
+
+    tr:hover {
+      background-color: #e9f5ff; /* Resaltar fila al pasar el mouse */
+    }
+
+    /* Estilos para dispositivos móviles */
+    @media (max-width: 600px) {
+      .container {
+        margin: 15px;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.5em;
+      }
+      form {
+        flex-direction: column; /* Apila los inputs en pantallas pequeñas */
+        align-items: stretch;
+      }
+      input[type="text"],
+      input[type="number"],
+      button[type="submit"] {
+        width: 100%;
+        min-width: unset;
+      }
+      table, th, td {
+        font-size: 0.9em;
+      }
+      th, td {
+        padding: 8px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <h1>Sistema de Inventario</h1>
+  <div class="container">
+    <h1>Sistema de Inventario</h1>
 
-  <h2>Agregar Producto</h2>
-  <form id="form-agregar">
-    <input type="text" id="codigo" placeholder="Código" required>
-    <input type="text" id="descripcion" placeholder="Descripción" readonly>
-    <input type="number" id="cantidad" placeholder="Cantidad" required>
-    <button type="submit">Agregar</button>
-  </form>
+    <h2>Agregar Producto</h2>
+    <form id="form-agregar">
+      <input type="text" id="codigo" placeholder="Código" required>
+      <input type="text" id="descripcion" placeholder="Descripción" readonly>
+      <input type="number" id="cantidad" placeholder="Cantidad" required step="any">
+      <button type="submit">Agregar</button>
+    </form>
 
-  <h2>Inventario Actual</h2>
-  <table id="tabla-inventario">
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Descripción</th>
-        <th>Cantidad</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+    <h2>Inventario Actual</h2>
+    <table id="tabla-inventario">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
 <script>
 // --------------------- CONFIGURACIÓN ---------------------
@@ -47,60 +180,69 @@ const API_URL = "https://script.google.com/macros/s/AKfycbxIdYihhPoFK6Atnwp11A29
 
 // Cargar inventario desde Google Sheets
 function cargarInventario() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.querySelector("#tabla-inventario tbody");
-      tbody.innerHTML = "";
-      data.forEach(item => {
-        tbody.innerHTML += `
-          <tr>
-            <td>${item.codigo}</td>
-            <td>${item.descripcion}</td>
-            <td>${item.cantidad}</td>
-          </tr>
-        `;
-      });
-    });
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#tabla-inventario tbody");
+      tbody.innerHTML = "";
+      data.forEach(item => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.codigo}</td>
+            <td>${item.descripcion}</td>
+            <td>${item.cantidad}</td>
+          </tr>
+        `;
+      });
+    });
 }
 
 // Autocompletar descripción según código
 document.getElementById("codigo").addEventListener("blur", function() {
-  const codigo = this.value.trim();
-  if (codigo) {
-    fetch(`${API_URL}?codigo=${codigo}`)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.error) {
-          document.getElementById("descripcion").value = data.descripcion;
-        } else {
-          document.getElementById("descripcion").value = "";
-          alert("Código no encontrado en catálogo");
-        }
-      });
-  }
+  const codigo = this.value.trim();
+  if (codigo) {
+    fetch(`${API_URL}?codigo=${codigo}`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) {
+          document.getElementById("descripcion").value = data.descripcion;
+        } else {
+          document.getElementById("descripcion").value = "";
+          alert("Código no encontrado en catálogo");
+        }
+      });
+  }
 });
 
 // Enviar formulario al Web App
 document.getElementById("form-agregar").addEventListener("submit", function(e) {
-  e.preventDefault();
-  
-  const producto = {
-    codigo: document.getElementById("codigo").value.trim(),
-    descripcion: document.getElementById("descripcion").value.trim(),
-    cantidad: parseFloat(document.getElementById("cantidad").value)
-  };
+  e.preventDefault();
+  
+  const cantidadInput = document.getElementById("cantidad");
+  const cantidad = parseFloat(cantidadInput.value);
 
-  fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify(producto)
-  })
-  .then(res => res.json())
-  .then(() => {
-    cargarInventario();
-    this.reset();
-    document.getElementById("descripcion").value = "";
-  });
+  if (isNaN(cantidad)) {
+    alert("Por favor, ingresa una cantidad numérica válida.");
+    cantidadInput.value = "";
+    return;
+  }
+  
+  const producto = {
+    codigo: document.getElementById("codigo").value.trim(),
+    descripcion: document.getElementById("descripcion").value.trim(),
+    cantidad: cantidad
+  };
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(producto)
+  })
+  .then(res => res.json())
+  .then(() => {
+    cargarInventario();
+    this.reset();
+    document.getElementById("descripcion").value = "";
+  });
 });
 
 // --------------------- INICIALIZACIÓN ---------------------
@@ -109,4 +251,3 @@ cargarInventario();
 
 </body>
 </html>
-
